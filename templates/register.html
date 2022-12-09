@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>회원가입 페이지</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- JS-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+    <!--Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+    <!--CSS-->
+    <link rel="stylesheet" href="static/style.css">
+
+    <script>
+        let getCode
+
+        //이메일 유효성 검사 추가하기.
+        function sendMail() {
+            let email = document.getElementById('email').value
+            $.ajax({
+                type: 'POST',
+                url: '/api/mail',
+                data: {email_give: email},
+                success: function (response) {
+                    console.log(response)
+                    if (response['result'] === 'failed') {
+                        alert(response['msg'])
+                        return response['msg']
+                    }
+                    getCode = response['code']
+                    $("#emailCodeBox").show()
+                    return response['result']
+                }
+            })
+        }
+
+        function isDefined(value) {
+            if (value === "" || value === undefined || value === null) {
+                return false
+            }
+            return true
+        }
+
+        function checkCode() {
+            let emailCode = document.getElementById('emailCode').value
+
+            if (!isDefined(getCode)) {
+                alert('이메일이 정상적으로 발송되지 않았습니다.')
+                return 'failed'
+            }
+            if (getCode === emailCode) {
+                $("#registerBox").show()
+                return 'success'
+            }
+            alert('인증번호가 맞지 않습니다.')
+            return 'failed'
+        }
+
+        function register() {
+            let email = document.getElementById('email').value
+            let pw = document.getElementById('pw').value
+            let pw2 = document.getElementById('pw2').value
+            let name = document.getElementById('name').value
+
+            if (isDefined(email) === false ||
+                isDefined(pw) === false ||
+                isDefined(pw2) === false ||
+                isDefined(name) === false) {
+                alert('빈칸')
+                return
+            }
+            if (pw !== pw2) {
+                alert('패스워드 불일치')
+                return
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: '/api/register',
+                data: {
+                    email_give: email,
+                    pw_give: pw,
+                    name_give: name
+                },
+                success: function (response) {
+                    alert('회원가입 완료!')
+                    window.location.reload()
+                }
+            })
+        }
+
+
+    </script>
+
+    <style>
+        .emailCodeBox {
+            display: none;
+        }
+
+        .registerBox {
+            display: none;
+        }
+
+    </style>
+</head>
+
+<body>
+<form id="msform">
+    <h4>Register</h4>
+    <input id="email" type="text" name="email" placeholder="Email"/>
+    <div class="emailSendButton">
+        <input onclick="sendMail()" type="button" name="next" class="next action-button" value="이메일 인증"/>
+    </div>
+    <div class="emailCodeBox" id="emailCodeBox">
+        <input id='emailCode' type="text" name="emailcode" placeholder="EmailCode"/>
+        <input onclick="checkCode()" type="button" name="next" class="next action-button" value="확인"/>
+    </div>
+    <div class="registerBox" id="registerBox">
+        <input id='name' type="text" name="name" placeholder="Nickname"/>
+        <input id="pw" type="password" name="pass" placeholder="Password"/>
+        <input id="pw2" type="password" name="cpass" placeholder="Confirm Password"/>
+        <input onclick="register()" type="button" name="next" class="next action-button" value="회원가입"/>
+    </div>
+</form>
+</body>
+</html>
