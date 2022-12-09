@@ -1,10 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
 
-</body>
+    <!-- OG -->
+    <meta property="og:title" content="모바일 청첩장" />
+    <meta
+      property="og:image"
+      content="https://cdn.topstarnews.net/news/photo/201807/456143_108614_510.jpg"
+    />
+    <meta property="og:description" content="신랑, 신부의 아름다운 첫 시작" />
+
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+
+    <title>모바일 청첩장</title>
+
+    <style>
+      :root {
+        --main-color: #d6a888;
+      }
+
+      * {
+        box-sizing: content-box;
+      }
+
+      #nav-container {
+        position: sticky;
+        top: 0;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        margin-top: 20px;
+        margin-right: 26px;
+      }
+
+      .btn-nav {
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+
+      #main-title-textarea {
+        width: 180px;
+        height: 100px;
+        resize: none;
+      }
+
+      .main-title-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 10px 40px;
+      }
+
+      .main-wedding-img-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .main-wedding-img {
+        overflow: hidden;
+        max-width: 600px;
+        max-height: 1000px;
+        aspect-ratio: 0.65;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        margin-top: 36px;
+
+        background-image: linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0.3),
+            rgba(0, 0, 0, 0.3)
+          ),
+          url(../static/img/main-wedding.jpg);
+        background-color: blue;
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 80%;
+        height: 60%;
+
+        border-top-left-radius: 800px;
+        border-top-right-radius: 800px;
+      }
+
+      .main-img-file-button {
+        padding: 6px 25px;
+        background-color: var(--main-color);
+        border-radius: 4px;
+        color: white;
+        cursor: pointer;
+      }
+
+      .main-name-container {
+        margin: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav id="nav-container">
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <button type="button" class="btn btn-outline-primary btn-nav">
+            미리보기
+          </button>
+        </li>
+        <li class="nav-item">
+          <button type="button" class="btn btn-primary btn-nav">저장</button>
+        </li>
+      </ul>
+    </nav>
+
+    <section id="main-section">
+      <div class="main-title-container">
+        <textarea
+          class="form-control"
+          id="main-title-textarea"
+          name="main-title-"
+          cols="10"
+          rows="3"
+          maxlength="30"
+          placeholder="우리라는 이름의&#13;&#10;아름다운&#13;&#10;첫 시작"
+        ></textarea>
+        <p>wedding day</p>
+      </div>
+
+      <div class="main-wedding-img-container">
+        <div class="main-wedding-img">
+          <div class="main-img-file-button">
+            <label class="main-img-file-button" for="main-img-input-file">
+              이미지 업로드
+            </label>
+            <input
+              type="file"
+              id="main-img-input-file"
+              accept="image/*"
+              style="display: none"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="main-name-container">
+        <div>
+          <label for=""></label>
+        </div>
+        <div>
+          <p>신부 이름</p>
+        </div>
+      </div>
+    </section>
+  </body>
 </html>
