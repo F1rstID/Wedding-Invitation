@@ -1,23 +1,16 @@
 import datetime
 import hashlib
 import json
-
 import jwt
 import string
 import random
 from flask import Flask, render_template, jsonify, request, session, redirect, url_for
 from flask_mail import Mail, Message
-from pymongo import MongoClient
-import certifi
+import base64
+import mongo
+import storage
 
-ca = certifi.where()
-
-# client = MongoClient('mongodb+srv://test:sparta@shinjungwan.pvw0aqx.mongodb.net/?retryWrites=true&w=majority')
-# db = client.users
-client = MongoClient('mongodb+srv://test:sparta@cluster0.m55mutr.mongodb.net/Cluster0?retryWrites=true&w=majority',
-                     tlsCAfile=ca)
-db = client.test
-
+db = mongo.client.users
 app = Flask(__name__)
 SECRET_KEY = 'Fullstack Mini Project'
 
@@ -38,59 +31,57 @@ mail = Mail(app)
 def home():
     return render_template('login.html')
 
-
 @app.route('/register', methods=['GET', 'POST'])
 def register_page():
     return render_template('register.html')
-
 
 @app.route('/edit_view')
 def editview():
     return render_template('edit_view.html')
 
+def upload(image_data, email):
+    s3 = storage.connection()
+
+    try:
+        image0 = image_data.split('data:image/png;base64,')[1]
+        image = image0 + '=' * (4 - len(image0) % 4)
+        decodedData = base64.b64decode(image)
+
+        s3.put_object(Key=email + '/' + '1.jpg',
+                      Body=decodedData,
+                      ContentType='image/*',
+                      ACL='public-read',
+                      Bucket='sparata-sjw')
+    except Exception as e:
+        print(e)
+    return print('success')
 
 @app.route('/api/save', methods=['POST'])
 def api_save():
     data_receive = request.form['data_give']
     data = json.loads(data_receive)
+    token = request.cookies.get('mytoken')
 
     try:
-        email = jwt.decode(data['token'], SECRET_KEY, algorithms=['HS256'])
+        email = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
     except jwt.ExpiredSignatureError:
         return  # 리프레쉬 토큰 해주기
     except jwt.exceptions.DecodeError:
         return '넌 누구냐.'
 
-    userdata = db.usersdata.find_one({'email': email})
+    userdata = db.usersdata.find_one({'email': email['email']})
+    doc = data
+    doc['email'] = email['email']
 
-    doc = {'email': email,
-           'main_title': data['main_title'],
-           'image_url': data['image_url'],
-           'groom_name': data['groom_name'],
-           'bride_name': data['bride_name'],
-           'wedding_date': data['wedding_date'],
-
-           'groom_father_name': data['groom_father_name'],
-           'groom_mother_name': data['groom_mother_name'],
-           
-           'bride_mother_name': data['bride_mother_name'],
-           'bride_father_name': data['bride_contact'],
-           
-           'wedding_hall_name': data['wedding_hall_name'],
-           'wedding_hall_address': data['wedding_hall_address'],
-           'wedding_hall_contact': data['wedding_hall_contact'],
-
-            'groom_contact': data['groom_contact'],
-           'bride_contact': data['bride_contact']
-           }
+    upload(data['image_url'], email['email'])
+    doc['image_url'] = 'https://sparata-sjw.s3.ap-northeast-2.amazonaws.com/' + email['email'] + '/1.jpg'
 
     if userdata is None:
         db.usersdata.insert_one(doc)
-        return jsonify(doc)
+        return doc
 
-    db.usersdata.update_one({'name': 'bobby'}, {'$set': doc})
-    return jsonify(doc)
-
+    db.usersdata.update_one({'email': email['email']}, {'$set': doc})
+    return doc
 
 @app.route('/api/load', methods=['POST'])
 def api_load():
@@ -102,18 +93,16 @@ def api_load():
         return  # 리프레쉬 토큰 해주기
     except jwt.exceptions.DecodeError:
         return '넌 누구냐.'
-    doc = db.usersdata.find_one({'email': email}, {'_id': False})
+    doc = db.usersdata.find_one({'email': email['email']}, {'_id': False})
 
     if doc is None:
         return '없어요, 아무것도, 진짜로'
 
     return jsonify(doc)
 
-
 @app.route('/edit_view', methods=['GET', 'POST'])
 def edit_view_page():
     return render_template('edit_view.html')
-
 
 @app.route('/api/register', methods=['GET', 'POST'])
 def api_register():
@@ -128,6 +117,13 @@ def api_register():
         'name': name_receive
     }
     db.users.insert_one(doc)
+
+    #  Email 과 같은 이름으로 S3에 폴더를 생성하기
+    s3 = storage.connection()
+    try:
+        s3.put_object(Bucket='sparata-sjw', Key=(email_receive + '/'))
+    except Exception as e:
+        print(e)
 
     return jsonify({'result': 'success'})
 
@@ -177,6 +173,9 @@ def api_login():
     # 찾지 못하면
     else:
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
+
+
+
 
 
 if __name__ == '__main__':
