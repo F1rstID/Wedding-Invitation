@@ -29,8 +29,6 @@ section {
   margin-right: 30px;
 }
 
-
-
 /*
 NAV
 ================================================ */
@@ -226,7 +224,6 @@ button {
 
 .waytocome-container > button {
   margin-top: 20px;
-
 }
 
 .map_wrap {
@@ -259,14 +256,17 @@ CONGRATULATION CONTACT SECTION
   cursor: pointer;
 }
 
-.map_wrap, .map_wrap * {
+.map_wrap,
+.map_wrap * {
   margin: 0;
   padding: 0;
-  font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
+  font-family: "Malgun Gothic", dotum, "돋움", sans-serif;
   font-size: 12px;
 }
 
-.map_wrap a, .map_wrap a:hover, .map_wrap a:active {
+.map_wrap a,
+.map_wrap a:hover,
+.map_wrap a:active {
   color: #000;
   text-decoration: none;
 }
@@ -300,7 +300,7 @@ CONGRATULATION CONTACT SECTION
   display: block;
   height: 1px;
   border: 0;
-  border-top: 2px solid #5F5F5F;
+  border-top: 2px solid #5f5f5f;
   margin: 3px 0;
 }
 
@@ -333,7 +333,8 @@ CONGRATULATION CONTACT SECTION
   margin-top: 4px;
 }
 
-#placesList .item h5, #placesList .item .info {
+#placesList .item h5,
+#placesList .item .info {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -349,7 +350,8 @@ CONGRATULATION CONTACT SECTION
 
 #placesList .info .jibun {
   padding-left: 26px;
-  background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;
+  background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png)
+    no-repeat;
 }
 
 #placesList .info .tel {
@@ -362,7 +364,8 @@ CONGRATULATION CONTACT SECTION
   width: 36px;
   height: 37px;
   margin: 10px 0 0 10px;
-  background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;
+  background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png)
+    no-repeat;
 }
 
 #placesList .item .marker_1 {
@@ -374,7 +377,7 @@ CONGRATULATION CONTACT SECTION
 }
 
 #placesList .item .marker_3 {
-  background-position: 0 -102px
+  background-position: 0 -102px;
 }
 
 #placesList .item .marker_4 {
@@ -440,4 +443,3 @@ CONGRATULATION CONTACT SECTION
   cursor: default;
   color: #777;
 }
-

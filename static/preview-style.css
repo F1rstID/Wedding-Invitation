@@ -286,3 +286,10 @@ section {
   justify-content: center;
   align-items: center;
 }
+
+.share-footer > p {
+  font-family: "Simonetta", cursive;
+  font-size: 20px;
+  text-align: center;
+  margin-top: 40px;
+}
