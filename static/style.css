@@ -1,6 +1,12 @@
 /*custom font*/
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
 
+@media (min-width: 320px) and (max-width: 768px) {
+	body {
+		width: 30%;
+	}
+}
+
 /*basic reset*/
 * {margin: 0; padding: 0;}
 
