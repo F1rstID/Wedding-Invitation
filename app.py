@@ -12,11 +12,11 @@ import certifi
 
 ca = certifi.where()
 
-# client = MongoClient('mongodb+srv://test:sparta@shinjungwan.pvw0aqx.mongodb.net/?retryWrites=true&w=majority')
-# db = client.users
-client = MongoClient('mongodb+srv://test:sparta@cluster0.m55mutr.mongodb.net/Cluster0?retryWrites=true&w=majority',
-                     tlsCAfile=ca)
-db = client.test
+client = MongoClient('mongodb+srv://test:sparta@shinjungwan.pvw0aqx.mongodb.net/?retryWrites=true&w=majority')
+db = client.users
+# client = MongoClient('mongodb+srv://test:sparta@cluster0.m55mutr.mongodb.net/Cluster0?retryWrites=true&w=majority',
+#                      tlsCAfile=ca)
+# db = client.test
 
 app = Flask(__name__)
 SECRET_KEY = 'Fullstack Mini Project'
@@ -53,9 +53,10 @@ def editview():
 def api_save():
     data_receive = request.form['data_give']
     data = json.loads(data_receive)
-
+    token = request.cookies.get('mytoken')
+    print(data)
     try:
-        email = jwt.decode(data['token'], SECRET_KEY, algorithms=['HS256'])
+        email = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
     except jwt.ExpiredSignatureError:
         return  # 리프레쉬 토큰 해주기
     except jwt.exceptions.DecodeError:
@@ -83,7 +84,7 @@ def api_save():
            'groom_contact': data['groom_contact'],
            'bride_contact': data['bride_contact']
            }
-
+    print(data['image_url'])
     if userdata is None:
         db.usersdata.insert_one(doc)
         return jsonify(doc)
