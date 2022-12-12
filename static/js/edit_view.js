@@ -2,6 +2,7 @@ const url = "http://127.0.0.1:5500/project01/templates";
 
 window.addEventListener("load", () => {
   setupBind();
+  $("#menu_wrap").hide();
 });
 
 function onClickedImageUpload() {
@@ -131,13 +132,10 @@ var ps = new kakao.maps.services.Places();
 // 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
 var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
 
-// 키워드로 장소를 검색합니다
-searchPlaces();
-$("#menu_wrap").hide();
 
 // 키워드 검색을 요청하는 함수입니다
 function searchPlaces() {
-  var keyword = document.getElementById("floatingInputName").value;
+  var keyword = document.getElementById("wedding-hall-name").value;
 
   if (!keyword.replace(/^\s+|\s+$/g, "")) {
     return false;
