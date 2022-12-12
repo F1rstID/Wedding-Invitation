@@ -17,14 +17,12 @@
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
 
-  <title>모바일 청첩장</title>
-
-  <!-- Style -->
-  <link rel="stylesheet" href="../static/edit-style.css" />
-</head>
-
-<body>
-  <!-- NAV 
+    <!-- Style -->
+    <link rel="stylesheet" href="../static/edit-style.css" />
+    <link rel="icon" href="../static/img/favicon.png" type="image/png"/>
+  </head>
+  <body>
+    <!-- NAV 
       #################################################### -->
   <nav id="nav-container">
     <ul class="nav nav-pills">
@@ -50,14 +48,20 @@
       <p>wedding day</p>
     </div>
 
-    <div class="main-wedding-img-container">
-      <div class="main-wedding-img">
-        <div class="main-img-file-button">
-          <label class="main-img-file-button" for="main-img-input-file">
-            이미지 업로드
-          </label>
-          <input type="file" id="main-img-input-file" accept="image/*" style="display: none"
-            onclick="onClickedImageUpload()" />
+      <div class="main-wedding-img-container">
+        <div class="main-wedding-img">
+          <div class="main-img-file-button">
+            <label for="main-img-input-file">
+              이미지 업로드
+            </label>
+            <input
+              type="file"
+              id="main-img-input-file"
+              accept="image/*"
+              style="display: none"
+              onclick="onClickedImageUpload()"
+            />
+          </div>
         </div>
       </div>
     </div>
