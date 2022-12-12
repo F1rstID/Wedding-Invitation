@@ -1,7 +1,7 @@
 import datetime
 import hashlib
 import json
-
+import boto3
 import jwt
 import string
 import random
@@ -51,12 +51,11 @@ def editview():
 
 @app.route('/api/save', methods=['POST'])
 def api_save():
-    token = request.cookies.get('mytoken')
     data_receive = request.form['data_give']
     data = json.loads(data_receive)
 
     try:
-        email = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
+        email = jwt.decode(data['token'], SECRET_KEY, algorithms=['HS256'])
     except jwt.ExpiredSignatureError:
         return  # 리프레쉬 토큰 해주기
     except jwt.exceptions.DecodeError:
@@ -68,17 +67,21 @@ def api_save():
            'main_title': data['main_title'],
            'image_url': data['image_url'],
            'groom_name': data['groom_name'],
-           'groom_mother_name': data['groom_mother_name'],
-           'groom_father_name': data['groom_father_name'],
-           'groom_contact': data['groom_contact'],
            'bride_name': data['bride_name'],
+           'wedding_date': data['wedding_date'],
+
+           'groom_father_name': data['groom_father_name'],
+           'groom_mother_name': data['groom_mother_name'],
+
            'bride_mother_name': data['bride_mother_name'],
            'bride_father_name': data['bride_contact'],
-           'bride_contact': data['bride_contact'],
-           'wedding_date': data['wedding_date'],
+
            'wedding_hall_name': data['wedding_hall_name'],
            'wedding_hall_address': data['wedding_hall_address'],
-           'wedding_hall_contact': data['wedding_hall_contact']
+           'wedding_hall_contact': data['wedding_hall_contact'],
+
+           'groom_contact': data['groom_contact'],
+           'bride_contact': data['bride_contact']
            }
 
     if userdata is None:
@@ -91,21 +94,20 @@ def api_save():
 
 @app.route('/api/load', methods=['POST'])
 def api_load():
-    token_receive = request.cookies.get('mytoken')
+    token_receive = request.form['token_give']
 
     try:
         email = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        print(email)
     except jwt.ExpiredSignatureError:
-        return ''
+        return  # 리프레쉬 토큰 해주기
     except jwt.exceptions.DecodeError:
-        return ''
-    doc = db.usersdata.find_one({'email': email['email']}, {'_id': False})
+        return '넌 누구냐.'
+    doc = db.usersdata.find_one({'email': email}, {'_id': False})
 
     if doc is None:
-        return 'None'
+        return '없어요, 아무것도, 진짜로'
 
-    return doc
+    return jsonify(doc)
 
 
 @app.route('/edit_view', methods=['GET', 'POST'])
@@ -126,6 +128,13 @@ def api_register():
         'name': name_receive
     }
     db.users.insert_one(doc)
+
+    #  Email 과 같은 이름으로 S3에 폴더를 생성하기
+    s3 = s3_connection()
+    try:
+        s3.put_object(Bucket='sparata-sjw', Key=(email_receive + '/'))
+    except Exception as e:
+        print(e)
 
     return jsonify({'result': 'success'})
 
@@ -176,6 +185,33 @@ def api_login():
     else:
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
 
+
+#     AWS S3 연결.
+def s3_connection():
+    try:
+        # s3 클라이언트 생성
+        s3 = boto3.client(
+            service_name="s3",
+            region_name="ap-northeast-2",
+            aws_access_key_id="AKIA4SXRXEFCH535AXXB",
+            aws_secret_access_key="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",
+        )
+    except Exception as e:
+        print(e)
+    else:
+        print("s3 bucket connected!")
+        return s3
+
+
+# s3 = s3_connection()
+#
+# try:
+#     s3.upload_file('C:\\Users\\wndhd\\Downloads\\papapa.png','sparata-sjw','wndhdks4536gmail.com.png')
+#     s3.put_object(Bucket='sparata-sjw', Key=('wndhdks4536@naver.com' + '/'))
+#
+# except Exception as e:
+#
+#     print(e)
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
