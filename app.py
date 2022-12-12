@@ -26,7 +26,8 @@ mail = Mail(app)
 
 @app.route('/')
 def home():
-    return render_template('register.html')
+    # return render_template('register.html')
+    return render_template('preview.html')
 
 
 @app.route('/api/register', methods=['POST'])

@@ -10,7 +10,6 @@ GENERAL STYLING
 }
 
 section {
-  margin-top: 100px;
   margin: 100px 40px 10px 40px;
 }
 
@@ -204,11 +203,29 @@ INVITATION PHRASES SECTION
 /*
 WAY TO COME SECTION
 ================================================ */
+button {
+  background-color: #4caf50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
 .waytocome-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.phone-inquiry {
+  border: none;
+  background-color: #0a0a23;
+  color: var(--main-color);
 }
 
 /*
@@ -220,3 +237,30 @@ CONGRATULATION CONTACT SECTION
   justify-content: center;
   align-items: center;
 }
+.button {
+  display: inline-block;
+  background-color: #4caf50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.button2 {
+  background-color: #008cba;
+} /* Blue */
+.button3 {
+  background-color: #f44336;
+} /* Red */
+.button4 {
+  background-color: #e7e7e7;
+  color: black;
+} /* Gray */
+.button5 {
+  background-color: #555555;
+} /* Black */
