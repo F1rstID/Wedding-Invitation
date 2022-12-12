@@ -51,11 +51,12 @@ def editview():
 
 @app.route('/api/save', methods=['POST'])
 def api_save():
+    token = request.cookies.get('mytoken')
     data_receive = request.form['data_give']
     data = json.loads(data_receive)
 
     try:
-        email = jwt.decode(data['token'], SECRET_KEY, algorithms=['HS256'])
+        email = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
     except jwt.ExpiredSignatureError:
         return  # 리프레쉬 토큰 해주기
     except jwt.exceptions.DecodeError:
