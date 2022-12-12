@@ -19,9 +19,9 @@
             crossorigin="anonymous"></script>
 
     <!--CSS-->
-    <link rel="stylesheet" href="/static/style.css">
-    <link rel="stylesheet" href="mediaqueires.css"
-    <link rel="icon" href="/static/img/favicon.png" type="image/png"/>
+    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="mediaqueires.css">
+    <link rel="icon" href="../static/img/favicon.png" type="image/png"/>
 
     <script>
         {% if msg %}
@@ -84,7 +84,7 @@
     </style>
 </head>
 
-<body class="login_body">
+<body id="login_body_wrap" class="login_body">
 <form id="msform">
     <h1>모바일 청첩장 만들기</h1>
     <input id="id" type="text" name="id" placeholder="Email"/>
