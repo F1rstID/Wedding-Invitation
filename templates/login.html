@@ -57,7 +57,7 @@
                         $.cookie('mytoken', response['token']);
 
                         alert('로그인 완료!')
-                        window.location.href = 'index'
+                        window.location.href = 'edit_view'
                     } else {
                         // 로그인이 안되면 에러메시지를 띄웁니다.
                         alert(response['msg'])
@@ -78,6 +78,7 @@
         #required_pw {
             display: none;
         }
+
 
     </style>
 </head>
@@ -105,5 +106,7 @@
         </div>
     </div>
 </form>
+
+
 </body>
 </html>
