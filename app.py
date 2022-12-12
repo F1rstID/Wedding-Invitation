@@ -90,20 +90,21 @@ def api_save():
 
 @app.route('/api/load', methods=['POST'])
 def api_load():
-    token_receive = request.form['token_give']
+    token_receive = request.cookies.get('mytoken')
 
     try:
         email = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        print(email)
     except jwt.ExpiredSignatureError:
-        return  # 리프레쉬 토큰 해주기
+        return ''
     except jwt.exceptions.DecodeError:
-        return '넌 누구냐.'
-    doc = db.usersdata.find_one({'email': email}, {'_id': False})
+        return ''
+    doc = db.usersdata.find_one({'email': email['email']}, {'_id': False})
 
     if doc is None:
-        return '없어요, 아무것도, 진짜로'
+        return 'None'
 
-    return jsonify(doc)
+    return doc
 
 
 @app.route('/edit_view', methods=['GET', 'POST'])
