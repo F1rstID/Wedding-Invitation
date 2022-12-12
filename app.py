@@ -44,12 +44,7 @@ def register_page():
     return render_template('register.html')
 
 
-@app.route('/index')
-def index_page():
-    return render_template('index.html')
-
-
-@app.route('/editview')
+@app.route('/edit_view')
 def editview():
     return render_template('edit_view.html')
 

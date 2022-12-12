@@ -18,16 +18,24 @@
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
     <!--CSS-->
-    <link rel="stylesheet" href="static/style.css">
-    <link rel="icon" href="static/img/favicon.png" type="image/png"/>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="icon" href="/static/img/favicon.png" type="image/png"/>
 
     <script>
         let getCode
 
         //이메일 유효성 검사 추가하기.
         function sendMail() {
-            alert("이메일이 발송되었습니다. 메일함을 확인해주세요.")
             let email = document.getElementById('email').value
+            const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+            if(isDefined(email) === false){
+                return alert('빈칸, 곤란.')
+            }
+            if(re.test(email) === false){
+                return alert('올바른 이메일 주소를 입력하세요.')
+            }
+
             $.ajax({
                 type: 'POST',
                 url: '/api/mail',
@@ -40,8 +48,9 @@
                     }
                     getCode = response['code']
                     $("#emailCodeBox").show()
+                    alert(response['msg'])
                     return response['result']
-                        alert(response['msg'])
+
                 }
             })
         }
@@ -99,9 +108,7 @@
                     window.location.href = '/'
                 }
             })
-        }
-        function test(){
-            window.location.href = 'naver.com'
+
         }
 
     </script>
@@ -135,7 +142,7 @@
         <input id="pw2" type="password" name="cpass" placeholder="Confirm Password"/>
         <input onclick="register()" type="button" name="next" class="next action-button" value="회원가입"/>
     </div>
-    <button onclick="test()"> aaaa</button>
+
 </form>
 </body>
 </html>
