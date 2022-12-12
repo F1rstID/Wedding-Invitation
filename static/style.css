@@ -16,6 +16,14 @@ html {
 body {
 	font-family: montserrat, arial, verdana;
 }
+
+/* 배경색*/
+.login_body, .register_body {
+	background-color: #D6A888;
+}
+
+
+
 /*form styles*/
 #msform {
 	width: 400px;
@@ -55,7 +63,7 @@ body {
 /*buttons*/
 #msform .action-button {
 	width: 100%;
-	background: #27AE60;
+	background: darkolivegreen;
 	font-weight: bold;
 	color: white;
 	border: 0 none;
@@ -66,6 +74,11 @@ body {
 }
 #msform .action-button:hover, #msform .action-button:focus {
 	box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+}
+
+#msform > h1 , #msform > h3 {
+	color : #735F32;
+	margin-bottom: 40px;
 }
 /*headings*/
 .fs-title {
@@ -128,4 +141,40 @@ body {
 #progressbar li.active:before,  #progressbar li.active:after{
 	background: #27AE60;
 	color: white;
+}
+
+/*login.html 아이디 */
+#required_id > p, #required_pw > p {
+	display: flex;
+	justify-content: flex-start;
+	color: red;
+	font-weight: bold;
+}
+
+#go_resigter > p {
+	font-size: 20px;
+	font-weight: bold;
+	color : #665A48;
+	margin-top: 30px;
+}
+
+.register_btn > button {
+	width: 80%;
+	height: 50px;
+	border-radius: 10px;
+	background-color: darkolivegreen;
+	border: none;
+	color : white;
+	font-size: 20px;
+}
+
+.login_btn > button {
+	width: 50%;
+	height: 40px;
+	border-radius: 10px;
+	background-color: white;
+	border: none;
+	color : dimgray;
+	margin-top: 30px;
+	margin-bottom: 30px;
 }
