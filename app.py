@@ -67,17 +67,21 @@ def api_save():
            'main_title': data['main_title'],
            'image_url': data['image_url'],
            'groom_name': data['groom_name'],
-           'groom_mother_name': data['groom_mother_name'],
-           'groom_father_name': data['groom_father_name'],
-           'groom_contact': data['groom_contact'],
            'bride_name': data['bride_name'],
+           'wedding_date': data['wedding_date'],
+
+           'groom_father_name': data['groom_father_name'],
+           'groom_mother_name': data['groom_mother_name'],
+           
            'bride_mother_name': data['bride_mother_name'],
            'bride_father_name': data['bride_contact'],
-           'bride_contact': data['bride_contact'],
-           'wedding_date': data['wedding_date'],
+           
            'wedding_hall_name': data['wedding_hall_name'],
            'wedding_hall_address': data['wedding_hall_address'],
-           'wedding_hall_contact': data['wedding_hall_contact']
+           'wedding_hall_contact': data['wedding_hall_contact'],
+
+            'groom_contact': data['groom_contact'],
+           'bride_contact': data['bride_contact']
            }
 
     if userdata is None:
