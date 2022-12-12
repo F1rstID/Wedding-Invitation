@@ -1,0 +1,222 @@
+/*
+GENERAL STYLING
+================================================ */
+:root {
+  --main-color: #d6a888;
+}
+
+* {
+  box-sizing: content-box;
+}
+
+section {
+  margin-top: 100px;
+  margin: 100px 40px 10px 40px;
+}
+
+.divide-line {
+  width: auto;
+  height: 1px;
+  background-color: black;
+  margin-bottom: 100px;
+}
+
+.section-title {
+  font-size: 36px;
+}
+
+.common-input {
+  width: 400px;
+  margin-right: 30px;
+}
+
+/*
+NAV
+================================================ */
+#nav-container {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  padding-top: 20px;
+  padding-right: 26px;
+  padding-bottom: 20px;
+  background-color: white;
+}
+
+.btn-nav {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+/*
+MAIN SECTION
+================================================ */
+#main-title-textarea {
+  width: 180px;
+  height: 100px;
+  resize: none;
+}
+.main-title-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.main-wedding-img-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.main-wedding-img {
+  overflow: hidden;
+  max-width: 600px;
+  max-height: 1000px;
+  aspect-ratio: 0.65;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 36px;
+
+  background-image: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.3),
+      rgba(0, 0, 0, 0.3)
+    ),
+    url(../static/img/main-wedding.jpg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: auto 100%;
+  width: 80%;
+  height: 60%;
+  border-top-left-radius: 800px;
+  border-top-right-radius: 800px;
+  border: 2px solid var(--main-color);
+}
+.main-img-file-button {
+  padding: 6px 25px;
+  background-color: var(--main-color);
+  border-radius: 4px;
+  color: white;
+}
+.main-name-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+.main-address-container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/*
+INVITATION PHRASES SECTION
+================================================ */
+.invite-phrases {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.wedding-announcement {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+}
+.groom-family-name {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto 20px auto;
+}
+.groom-parents {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.bride-family-name {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto 20px auto;
+
+  letter-spacing: 5px;
+}
+.bride-parents {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.groom-father-name {
+  width: 90px;
+  height: 30px;
+  resize: none;
+  margin-right: 5px;
+}
+.groom-mother-name {
+  width: 90px;
+  height: 30px;
+  resize: none;
+  margin-right: 5px;
+}
+.groom-name {
+  width: 90px;
+  height: 30px;
+  resize: none;
+  margin-left: 10px;
+}
+.bride-father-name {
+  width: 90px;
+  height: 30px;
+  resize: none;
+  margin-right: 5px;
+}
+.bride-mother-name {
+  width: 90px;
+  height: 30px;
+  resize: none;
+  margin-right: 5px;
+}
+.bride-name {
+  width: 90px;
+  height: 30px;
+  resize: none;
+  margin-left: 10px;
+  justify-content: center;
+}
+
+/*
+WAY TO COME SECTION
+================================================ */
+.waytocome-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/*
+CONGRATULATION CONTACT SECTION
+================================================ */
+.congratulation-contact-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
