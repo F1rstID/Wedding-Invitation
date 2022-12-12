@@ -41,13 +41,11 @@ def home():
 def register_page():
     return render_template('register.html')
 
-@app.route('/index')
-def index_page():
-    return render_template('index.html')
+@app.route('/edit_view', methods=['GET', 'POST'])
+def edit_view_page():
+    return render_template('edit_view.html')
 
-@app.route('/page2', methods=['GET', 'POST'])
-def page2_page():
-    return render_template('page2.html')
+
 
 
 @app.route('/api/register', methods=['GET', 'POST'])
