@@ -99,9 +99,16 @@ MAIN SECTION
 }
 .main-img-file-button {
   padding: 6px 25px;
-  background-color: var(--main-color);
+  background-color: ivory;
   border-radius: 4px;
-  color: white;
+  color: var(--main-color);
+  transition: background-color .4s;
+}
+
+.main-img-file-button:hover {
+  background-color: var(--main-color);
+  color : white;
+  cursor: pointer;
 }
 .main-name-container {
   display: flex;
