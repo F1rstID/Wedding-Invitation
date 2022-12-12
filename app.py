@@ -44,6 +44,7 @@ def register_page():
     return render_template('register.html')
 
 
+
 @app.route('/edit_view')
 def editview():
     return render_template('edit_view.html')
@@ -106,9 +107,12 @@ def api_load():
     return jsonify(doc)
 
 
-@app.route('/page2', methods=['GET', 'POST'])
-def page2_page():
-    return render_template('page2.html')
+@app.route('/edit_view', methods=['GET', 'POST'])
+def edit_view_page():
+    return render_template('edit_view.html')
+
+
+
 
 
 @app.route('/api/register', methods=['GET', 'POST'])
