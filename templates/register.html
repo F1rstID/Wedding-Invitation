@@ -18,7 +18,7 @@
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
     <!--CSS-->
-    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="/static/style.css">
 
     <script>
         let getCode
@@ -97,7 +97,9 @@
                 }
             })
         }
-
+        function test(){
+            window.location.href = 'naver.com'
+        }
 
     </script>
 
@@ -130,6 +132,7 @@
         <input id="pw2" type="password" name="cpass" placeholder="Confirm Password"/>
         <input onclick="register()" type="button" name="next" class="next action-button" value="회원가입"/>
     </div>
+    <button onclick="test()"> aaaa</button>
 </form>
 </body>
 </html>

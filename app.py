@@ -1,5 +1,7 @@
 import datetime
 import hashlib
+import json
+
 import jwt
 import string
 import random
@@ -24,9 +26,71 @@ app.config.update(mail_settings)
 mail = Mail(app)
 
 
-@app.route('/')
-def home():
+@app.route('/register')
+def register():
     return render_template('register.html')
+
+
+@app.route('/editview')
+def editview():
+    return render_template('edit_view.html')
+
+
+@app.route('/api/save', methods=['POST'])
+def api_save():
+    data_receive = request.form['data_give']
+    data = json.loads(data_receive)
+
+    try:
+        email = jwt.decode(data['token'], SECRET_KEY, algorithms=['HS256'])
+    except jwt.ExpiredSignatureError:
+        return  # 리프레쉬 토큰 해주기
+    except jwt.exceptions.DecodeError:
+        return '넌 누구냐.'
+
+    userdata = db.usersdata.find_one({'email': email})
+
+    doc = {'email': email,
+           'main_title': data['main_title'],
+           'image_url': data['image_url'],
+           'groom_name': data['groom_name'],
+           'groom_mother_name': data['groom_mother_name'],
+           'groom_father_name': data['groom_father_name'],
+           'groom_contact': data['groom_contact'],
+           'bride_name': data['bride_name'],
+           'bride_mother_name': data['bride_mother_name'],
+           'bride_father_name': data['bride_contact'],
+           'bride_contact': data['bride_contact'],
+           'wedding_date': data['wedding_date'],
+           'wedding_hall_name': data['wedding_hall_name'],
+           'wedding_hall_address': data['wedding_hall_address'],
+           'wedding_hall_contact': data['wedding_hall_contact']
+           }
+
+    if userdata is None:
+        db.usersdata.insert_one(doc)
+        return jsonify(doc)
+
+    db.usersdata.update_one({'name': 'bobby'}, {'$set': doc})
+    return jsonify(doc)
+
+
+@app.route('/api/load', methods=['POST'])
+def api_load():
+    token_receive = request.form['token_give']
+
+    try:
+        email = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+    except jwt.ExpiredSignatureError:
+        return  # 리프레쉬 토큰 해주기
+    except jwt.exceptions.DecodeError:
+        return '넌 누구냐.'
+    doc = db.usersdata.find_one({'email': email}, {'_id': False})
+
+    if doc is None:
+        return '없어요, 아무것도, 진짜로'
+
+    return jsonify(doc)
 
 
 @app.route('/api/register', methods=['POST'])
@@ -71,7 +135,7 @@ def api_login():
 
     hash_pw = hashlib.sha256(pw_receive.encode('utf-8')).hexdigest()
 
-    user = db.user.find_one({'email': email_receive}, {'_id': False})
+    user = db.users.find_one({'email': email_receive}, {'_id': False})
 
     if user is None:
         return jsonify({'result': 'failed', 'msg': '존재하지 않는 email 입니다.'})
