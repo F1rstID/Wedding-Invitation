@@ -1,0 +1,295 @@
+/*
+GENERAL STYLING
+================================================ */
+:root {
+  --main-color: #d6a888;
+  --main-text-color: #464646;
+  --background-color: #fffdf8;
+}
+
+* {
+  box-sizing: content-box;
+}
+
+section {
+  padding-bottom: 100px;
+  margin: 0px 40px;
+}
+
+.divide-line {
+  width: auto;
+  height: 1px;
+  background-color: black;
+  margin-bottom: 70px;
+}
+
+.background-container {
+  background-color: var(--background-color);
+}
+
+.section-title {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 36px;
+}
+
+.common-input {
+  width: 400px;
+  margin-right: 30px;
+}
+
+.common-button {
+  background-color: var(--main-color);
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 20px;
+  margin-top: 40px;
+}
+
+/*
+  MAIN SECTION
+  ================================================ */
+.main-title-container {
+  padding-top: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.main-title-container > p:nth-child(1) {
+  font-family: "Gamja Flower", cursive;
+  font-size: 24px;
+  color: var(--main-color);
+  width: 200px;
+}
+.main-title-container > p:nth-child(2) {
+  font-family: "Simonetta", cursive;
+  font-size: 24px;
+  color: var(--main-color);
+  margin-bottom: 50px;
+}
+.main-wedding-img-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.main-wedding-img {
+  overflow: hidden;
+  max-width: 600px;
+  max-height: 1000px;
+  aspect-ratio: 0.65;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 36px;
+
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: auto 100%;
+  width: 80%;
+  height: 60%;
+  border-top-left-radius: 800px;
+  border-top-right-radius: 800px;
+  border: 2px solid var(--main-color);
+}
+.main-name-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+.main-name-container > p:nth-child(1) {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 30px;
+  text-align: left;
+  color: var(--main-text-color);
+  max-width: 600px;
+  width: 80%;
+  line-height: 100%;
+}
+.main-name-container > p:nth-child(2) {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 30px;
+  text-align: left;
+  color: var(--main-text-color);
+  max-width: 600px;
+  width: 80%;
+  line-height: 80%;
+}
+.main-address-container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.main-address-container > p:nth-child(1) {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 18px;
+  text-align: left;
+  color: var(--main-text-color);
+  max-width: 600px;
+  width: 80%;
+  line-height: 100%;
+}
+.main-address-container > p:nth-child(2) {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 18px;
+  text-align: left;
+  color: var(--main-text-color);
+  max-width: 600px;
+  width: 80%;
+  line-height: 50%;
+}
+
+/*
+  INVITATION PHRASES SECTION
+  ================================================ */
+.invite-phrases {
+  padding: 30px 0px;
+}
+.invite-phrases p {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 18px;
+  text-align: center;
+  line-height: 30px;
+}
+.wedding-announcement {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+}
+.groom-family-name {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 50px auto 20px auto;
+}
+.groom-family-name > p {
+  width: 50px;
+}
+.groom-parents {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.groom-father-name {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 18px;
+  text-align: right;
+  height: 20px;
+  width: 100px;
+  margin-right: 10px;
+}
+.groom-mother-name {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 18px;
+  text-align: right;
+  height: 20px;
+  width: 100px;
+  margin-right: 10px;
+}
+.groom-name {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  margin-left: 10px;
+  padding-bottom: 2px;
+  text-align: center;
+}
+.bride-family-name {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 50px auto 20px auto;
+}
+.bride-family-name > p {
+  width: 50px;
+}
+.bride-parents {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.bride-father-name {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 18px;
+  text-align: right;
+  height: 20px;
+  width: 100px;
+  margin-right: 10px;
+}
+.bride-mother-name {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 18px;
+  text-align: right;
+  height: 20px;
+  width: 100px;
+  margin-right: 10px;
+}
+.bride-name {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  margin-left: 10px;
+  padding-bottom: 2px;
+  text-align: center;
+}
+
+/*
+  WAY TO COME SECTION
+  ================================================ */
+.waytocome-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/*
+  CONGRATULATION CONTACT SECTION
+  ================================================ */
+.congratulation-contact-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-group input {
+  background-color: white;
+  border: 1px solid #626a71;
+}
+
+/*
+  SHARE SECTION
+  ================================================ */
+.share-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.share-footer > p {
+  font-family: "Simonetta", cursive;
+  font-size: 20px;
+  text-align: center;
+  margin-top: 40px;
+}
