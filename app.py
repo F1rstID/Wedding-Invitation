@@ -9,6 +9,7 @@ from flask import Flask, render_template, jsonify, request, session, redirect, u
 from flask_mail import Mail, Message
 from pymongo import MongoClient
 import certifi
+import base64
 
 ca = certifi.where()
 
@@ -49,12 +50,44 @@ def editview():
     return render_template('edit_view.html')
 
 
+def upload(image_data, email):
+
+    s3 = s3_connection()
+
+    try:
+        # s3.put_object(Bucket='sparata-sjw', Key=(email+ '/'))
+        image0 = image_data.split('data:image/png;base64,')[1]
+        image = image0 + '=' * (4 - len(image0) % 4)
+        data1 = base64.b64decode(image)
+
+        print(data1)
+        s3.put_object(Key=email + '/' + '1.jpg',
+                      Body=data1,
+                      ContentType='image/*',
+                      ACL='public-read',
+                      Bucket='sparata-sjw')
+    except Exception as e:
+
+        print(e)
+    return print('success')
+
+# s3 = s3_connection()
+#
+# try:
+#     s3.upload_file('C:\\Users\\wndhd\\Downloads\\papapa.png','sparata-sjw','wndhdks4536gmail.com.png')
+#     s3.put_object(Bucket='sparata-sjw', Key=('wndhdks4536@naver.com' + '/'))
+#
+# except Exception as e:
+#
+#     print(e)
+
+
 @app.route('/api/save', methods=['POST'])
 def api_save():
     data_receive = request.form['data_give']
     data = json.loads(data_receive)
     token = request.cookies.get('mytoken')
-    print(data)
+
     try:
         email = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
     except jwt.ExpiredSignatureError:
@@ -62,35 +95,21 @@ def api_save():
     except jwt.exceptions.DecodeError:
         return '넌 누구냐.'
 
-    userdata = db.usersdata.find_one({'email': email})
+    userdata = db.usersdata.find_one({'email': email['email']})
+    # https://sparata-sjw.s3.ap-northeast-2.amazonaws.com/
+    doc = data
+    # print(data['image_url'])
+    doc['email'] = email['email']
 
-    doc = {'email': email,
-           'main_title': data['main_title'],
-           'image_url': data['image_url'],
-           'groom_name': data['groom_name'],
-           'bride_name': data['bride_name'],
-           'wedding_date': data['wedding_date'],
+    upload(data['image_url'], email['email'])
+    doc['image_url'] = 'https://sparata-sjw.s3.ap-northeast-2.amazonaws.com/' + email['email'] + '/1.jpg'
 
-           'groom_father_name': data['groom_father_name'],
-           'groom_mother_name': data['groom_mother_name'],
-
-           'bride_mother_name': data['bride_mother_name'],
-           'bride_father_name': data['bride_contact'],
-
-           'wedding_hall_name': data['wedding_hall_name'],
-           'wedding_hall_address': data['wedding_hall_address'],
-           'wedding_hall_contact': data['wedding_hall_contact'],
-
-           'groom_contact': data['groom_contact'],
-           'bride_contact': data['bride_contact']
-           }
-    print(data['image_url'])
     if userdata is None:
         db.usersdata.insert_one(doc)
-        return jsonify(doc)
+        return doc
 
-    db.usersdata.update_one({'name': 'bobby'}, {'$set': doc})
-    return jsonify(doc)
+    db.usersdata.update_one({'email': email['email']}, {'$set': doc})
+    return doc
 
 
 @app.route('/api/load', methods=['POST'])
@@ -103,7 +122,7 @@ def api_load():
         return  # 리프레쉬 토큰 해주기
     except jwt.exceptions.DecodeError:
         return '넌 누구냐.'
-    doc = db.usersdata.find_one({'email': email}, {'_id': False})
+    doc = db.usersdata.find_one({'email': email['email']}, {'_id': False})
 
     if doc is None:
         return '없어요, 아무것도, 진짜로'
