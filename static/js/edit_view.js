@@ -92,6 +92,7 @@ function editSave() {
             console.log(response);
         },
     });
+}
 
     /////////////////////////////////////////////////////////////////
     //============================ Map =====================
@@ -104,6 +105,8 @@ function editSave() {
             center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
             level: 3, // 지도의 확대 레벨
         };
+
+
 
     // 지도를 생성합니다
     var map = new kakao.maps.Map(mapContainer, mapOption);
@@ -307,6 +310,5 @@ function editSave() {
         while (el.hasChildNodes()) {
             el.removeChild(el.lastChild);
         }
-    }
 }
 
