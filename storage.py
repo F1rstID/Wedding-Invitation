@@ -3,6 +3,7 @@ import boto3
 ACCESS_KEY = "AKIA4SXRXEFCH535AXXB"
 SECRET_KEY = "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"
 
+
 # AWS S3 연결.
 def connection():
     try:

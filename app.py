@@ -46,6 +46,24 @@ def upload(image_data, email):
     s3 = storage.connection()
 
     try:
+        image0 = image_data.split('data:image/png;base64,')[1]
+        image = image0 + '=' * (4 - len(image0) % 4)
+        decodedData = base64.b64decode(image)
+
+        s3.put_object(Key=email + '/' + '1.jpg',
+                      Body=decodedData,
+                      ContentType='image/*',
+                      ACL='public-read',
+                      Bucket='sparata-sjw')
+    except Exception as e:
+        print(e)
+    return print('success')
+
+
+def upload(image_data, email):
+    s3 = storage.connection()
+
+    try:
         image_split = image_data.split('data:image/jpeg;base64,')[1]
         image = image_split + '=' * (4 - len(image_split) % 4)
         decoded_data = base64.b64decode(image)
