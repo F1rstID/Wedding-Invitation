@@ -8970,3 +8970,7 @@ venv/lib/python3.11/site-packages/urllib3/util/timeout.py
 venv/lib/python3.11/site-packages/urllib3/util/url.py
 
 venv/lib/python3.11/site-packages/urllib3/util/wait.py
+
+__pycache__/mongo.cpython-311.pyc
+
+__pycache__/storage.cpython-311.pyc
