@@ -31,13 +31,16 @@ mail = Mail(app)
 def home():
     return render_template('login.html')
 
+
 @app.route('/register', methods=['GET', 'POST'])
 def register_page():
     return render_template('register.html')
 
+
 @app.route('/edit_view')
 def editview():
     return render_template('edit_view.html')
+
 
 def upload(image_data, email):
     s3 = storage.connection()
@@ -55,6 +58,25 @@ def upload(image_data, email):
     except Exception as e:
         print(e)
     return print('success')
+
+
+def upload(image_data, email):
+    s3 = storage.connection()
+
+    try:
+        image_split = image_data.split('data:image/jpeg;base64,')[1]
+        image = image_split + '=' * (4 - len(image_split) % 4)
+        decoded_data = base64.b64decode(image)
+
+        s3.put_object(Key=email + '/' + '1.jpg',
+                      Body=decoded_data,
+                      ContentType='image/*',
+                      ACL='public-read',
+                      Bucket='sparata-sjw')
+    except Exception as e:
+        print(e)
+    return print('success')
+
 
 @app.route('/api/save', methods=['POST'])
 def api_save():
@@ -83,9 +105,10 @@ def api_save():
     db.usersdata.update_one({'email': email['email']}, {'$set': doc})
     return doc
 
+
 @app.route('/api/load', methods=['POST'])
 def api_load():
-    token_receive = request.form['token_give']
+    token_receive = request.cookies.get('mytoken')
 
     try:
         email = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
@@ -100,9 +123,11 @@ def api_load():
 
     return jsonify(doc)
 
+
 @app.route('/edit_view', methods=['GET', 'POST'])
 def edit_view_page():
     return render_template('edit_view.html')
+
 
 @app.route('/api/register', methods=['GET', 'POST'])
 def api_register():
@@ -173,9 +198,6 @@ def api_login():
     # 찾지 못하면
     else:
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
-
-
-
 
 
 if __name__ == '__main__':

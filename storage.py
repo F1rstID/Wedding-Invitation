@@ -1,5 +1,9 @@
 import boto3
 
+ACCESS_KEY = "AKIA4SXRXEFCH535AXXB"
+SECRET_KEY = "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"
+
+
 # AWS S3 연결.
 def connection():
     try:
@@ -7,8 +11,8 @@ def connection():
         s3 = boto3.client(
             service_name="s3",
             region_name="ap-northeast-2",
-            aws_access_key_id="AKIAXDUCX6BNWIKQ3LEC",
-            aws_secret_access_key="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",
+            aws_access_key_id=ACCESS_KEY,
+            aws_secret_access_key=SECRET_KEY
         )
     except Exception as e:
         print(e)
