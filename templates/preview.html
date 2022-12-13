@@ -36,6 +36,10 @@
     <link rel="icon" href="../static/img/favicon.png" type="image/png" />
 
     <title>모바일 청첩장</title>
+
+
+
+
 </head>
 
 <body>
@@ -68,7 +72,7 @@
     #################################################### -->
     <div class="divide-line"></div>
     <section id="invitation-phrase-section">
-        <p class="section-title wedding-announcement">결혼합니다</h1>
+        <p class="section-title wedding-announcement">결혼합니다</p>
         <div class="invite-phrases">
             <p id="invite-phrases-textarea">
                 따스한 봄날을 알리는 입춘<br />
@@ -116,9 +120,28 @@
                 <div>
                     <p class="section-title">오시는 길</p>
                 </div>
+                <div class="waytocome-container-address">
+                    <p id="wedding-hall-name" class="form-control mb-2 h-auto">더컨벤션 신사 4층, 그랜드볼룸</p>
+                    <p id="wedding-hall-address" class="form-control mb-2 h-auto">서울 강남구 강남대로 652</p>
+                </div>
+
+
                 <button id="wedding-hall-phone" class="common-button">전화문의</button>
             </div>
         </section>
+    </div>
+
+    <div class="map_wrap">
+        <div id="map" style="width: 400px;height:400px;position:center;overflow:hidden;"></div>
+
+        <div id="menu_wrap" class="bg_white">
+            <div class="option">
+
+            </div>
+            <hr>
+            <ul id="placesList"></ul>
+            <div id="pagination"></div>
+        </div>
     </div>
 
     <!-- Congratulation Contact Section
@@ -167,7 +190,10 @@
 
     <!-- Javascript
     #################################################### -->
+    <script type="text/javascript"
+    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=96e7c6e52ee729c9e2b0e6bd11f3e55c&libraries=services"></script>
     <script src="../static/js/preview.js"></script>
+
 </body>
 
 </html>
