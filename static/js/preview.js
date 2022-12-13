@@ -1,7 +1,7 @@
 window.addEventListener("load", () => {
     getAllData();
 });
-let getEmail = 'None'
+let getEmail
 
 function getParameter(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
@@ -18,6 +18,26 @@ function getAllData() {
         data: {},
         success: function (response) {
             getEmail = getParameter("email")
+
+            let main_title = getParameter('main_title')
+            let image_url = getParameter('image_url')
+            let groom_name = getParameter('groom_name')
+            let bride_name = getParameter('bride_name')
+            let wedding_date = getParameter('wedding_date')
+            let wedding_detail_location = getParameter('wedding_detail_location')
+            let invitation_parases = getParameter('invitation_parases')
+            let groom_father_name = getParameter('groom_father_name')
+            let groom_mother_name = getParameter('groom_mother_name')
+            let bride_father_name = getParameter('bride_father_name')
+            let bride_mother_name = getParameter('bride_mother_name')
+            let wedding_hall_name = getParameter('wedding_hall_name')
+            let wedding_hall_address = getParameter('wedding_hall_address')
+            let wedding_hall_contact = getParameter('wedding_hall_contact')
+            let groom_contact = getParameter('groom_contact')
+            let bride_contact = getParameter('bride_contact')
+
+
+
             $(".main-wedding-img").css({
                 backgroundImage: `url(${response["image_url"]})`,
             });

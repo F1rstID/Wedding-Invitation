@@ -112,8 +112,44 @@ def api_load_get(email):
 
     if doc is None:
         return '없어요, 아무것도, 진짜로'
+    main_title = doc['main_title']
+    image_url = doc['image_url']
+    groom_name = doc['groom_name']
+    bride_name = doc['bride_name']
+    wedding_date = doc['wedding_date']
+    wedding_detail_location = doc['wedding_detail_location']
+    invitation_parases = doc['invitation_parases']
+    groom_father_name = doc['groom_father_name']
+    groom_mother_name = doc['groom_mother_name']
+    bride_father_name = doc['bride_father_name']
+    bride_mother_name = doc['bride_mother_name']
+    wedding_hall_name = doc['wedding_hall_name']
+    wedding_hall_address = doc['wedding_hall_address']
+    wedding_hall_contact = doc['wedding_hall_contact']
+    groom_contact = doc['groom_contact']
+    bride_contact = doc['bride_contact']
+    email = doc['email']
 
-    return redirect(url_for('preview', doc=doc, email=email))
+
+
+    return redirect(url_for('preview',
+                            main_title=main_title,
+                            image_url=image_url,
+                            groom_name=groom_name,
+                            bride_name=bride_name,
+                            wedding_date=wedding_date,
+                            wedding_detail_location=wedding_detail_location,
+                            invitation_parases=invitation_parases,
+                            groom_father_name=groom_father_name,
+                            groom_mother_name=groom_mother_name,
+                            bride_father_name=bride_father_name,
+                            bride_mother_name=bride_mother_name,
+                            wedding_hall_name=wedding_hall_name,
+                            wedding_hall_address=wedding_hall_address,
+                            wedding_hall_contact=wedding_hall_contact,
+                            groom_contact=groom_contact,
+                            bride_contact=bride_contact,
+                            email=email))
 
 
 @app.route('/edit_view', methods=['GET', 'POST'])
