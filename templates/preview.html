@@ -17,6 +17,14 @@
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
 
+    <!-- Kakaotalk -->
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.1/kakao.min.js"
+        integrity="sha384-eKjgHJ9+vwU/FCSUG3nV1RKFolUXLsc6nLQ2R1tD0t4YFPCvRmkcF8saIfOZNWf/"
+        crossorigin="anonymous"></script>
+    <script>
+    Kakao.init('1f505132092d086de54c7d54b9777647'); // 사용하려는 앱의 JavaScript 키 입력</script>
+
+
 
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap" rel="stylesheet"/>
@@ -151,7 +159,7 @@
             <div>
                 <p class="section-title">소식공유</p>
             </div>
-            <button class="common-button" onclick="">카카오 공유하기</button>
+            <button class="common-button" onclick="shareMessage()">카카오 공유하기</button>
             <div class="share-footer">
                 <p>Thank you!<br>❤</p>
             </div>

@@ -119,14 +119,15 @@ function editSave() {
     bride_contact: brideContact,
   };
 
-  $.ajax({
-    type: "POST",
-    url: "/api/save",
-    data: { data_give: JSON.stringify(doc) },
-    success: function (response) {
-      console.log(response);
-    },
-  });
+    $.ajax({
+        type: "POST",
+        url: "/api/save",
+        data: {data_give: JSON.stringify(doc)},
+        success: function (response) {
+            console.log(response);
+        },
+    });
+}
 
   /////////////////////////////////////////////////////////////////
   //============================ Map =====================
@@ -140,8 +141,10 @@ function editSave() {
       level: 3, // 지도의 확대 레벨
     };
 
-  // 지도를 생성합니다
-  var map = new kakao.maps.Map(mapContainer, mapOption);
+
+
+    // 지도를 생성합니다
+    var map = new kakao.maps.Map(mapContainer, mapOption);
 
   // 장소 검색 객체를 생성합니다
   var ps = new kakao.maps.services.Places();
@@ -337,10 +340,9 @@ function editSave() {
     infowindow.open(map, marker);
   }
 
-  // 검색결과 목록의 자식 Element를 제거하는 함수입니다
-  function removeAllChildNods(el) {
-    while (el.hasChildNodes()) {
-      el.removeChild(el.lastChild);
-    }
-  }
+    // 검색결과 목록의 자식 Element를 제거하는 함수입니다
+    function removeAllChildNods(el) {
+        while (el.hasChildNodes()) {
+            el.removeChild(el.lastChild);
+        }
 }
