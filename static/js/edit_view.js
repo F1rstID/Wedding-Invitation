@@ -2,8 +2,47 @@ let imageData = "";
 
 window.addEventListener("load", () => {
   setupBind();
+  getAllData();
+
   $("#menu_wrap").hide();
 });
+
+function getAllData() {
+  $.ajax({
+    type: "GET",
+    url: "/api/load",
+    data: {},
+    success: function (response) {
+      console.log("123123", response);
+      $("#main-title-textarea").val(response["main_title"]);
+
+      let imageElement = document.querySelector(".main-wedding-img");
+      // imageElement.style.backgroundImage = `url(${response["image_url"]})`;
+      imageElement.style.backgroundImage = response["image_url"];
+
+      $("#floating-input-groom").val(response["groom_name"]);
+      $("#floating-input-bride").val(response["bride_name"]);
+      $("#groom-name").val(response["groom_name"]);
+      $("#bride-name").val(response["bride_name"]);
+      $("#floating-input-detail-date").val(response["wedding_date"]);
+      $("#floating-input-detail-location").val(
+        response["wedding_detail_location"]
+      );
+      $("#invite-phrases-textarea").val(response["invitation_parases"]);
+      $("#groom-father-name").val(response["groom_father_name"]);
+      $("#groom-mother-name").val(response["groom_mother_name"]);
+      $("#bride-father-name").val(response["bride_father_name"]);
+      $("#bride-mother-name").val(response["bride_mother_name"]);
+
+      $("#wedding-hall-name").val(response["wedding_hall_name"]);
+      $("#wedding-hall-address").val(response["wedding_hall_address"]);
+      $("#wedding-hall-phone").val(response["wedding_hall_contact"]);
+
+      $("#input-groom-contact").val(response["groom_contact"]);
+      $("#input-bride-contact").val(response["bride_contact"]);
+    },
+  });
+}
 
 function onClickedImageUpload() {
   const imageInputElement = document.getElementById("main-img-input-file");

@@ -54,7 +54,7 @@ def upload(image_data, email):
                       Body=decodedData,
                       ContentType='image/*',
                       ACL='public-read',
-                      Bucket='sparata-sjw')
+                      Bucket=storage.BUCKET)
     except Exception as e:
         print(e)
     return print('success')
@@ -96,7 +96,7 @@ def api_save():
     doc['email'] = email['email']
 
     upload(data['image_url'], email['email'])
-    doc['image_url'] = 'https://sparata-sjw.s3.ap-northeast-2.amazonaws.com/' + email['email'] + '/1.jpg'
+    doc['image_url'] = 'https://test-buzz-bucket.s3.ap-northeast-2.amazonaws.com/' + email['email'] + '/1.jpg'
 
     if userdata is None:
         db.usersdata.insert_one(doc)
@@ -105,10 +105,9 @@ def api_save():
     db.usersdata.update_one({'email': email['email']}, {'$set': doc})
     return doc
 
-
-@app.route('/api/load', methods=['POST'])
+@app.route('/api/load', methods=['GET'])
 def api_load():
-    token_receive = request.cookies.get('mytoken')
+    token_receive = request.cookies.get("mytoken")
 
     try:
         email = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
@@ -146,7 +145,7 @@ def api_register():
     #  Email 과 같은 이름으로 S3에 폴더를 생성하기
     s3 = storage.connection()
     try:
-        s3.put_object(Bucket='sparata-sjw', Key=(email_receive + '/'))
+        s3.put_object(Bucket=storage.BUCKET, Key=(email_receive + '/'))
     except Exception as e:
         print(e)
 
@@ -198,7 +197,6 @@ def api_login():
     # 찾지 못하면
     else:
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
-
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
