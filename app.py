@@ -60,7 +60,6 @@ def upload(image_data, email):
     return print('success')
 
 
-
 @app.route('/api/save', methods=['POST'])
 def api_save():
     data_receive = request.form['data_give']
@@ -91,7 +90,7 @@ def api_save():
 
 @app.route('/api/load', methods=['POST'])
 def api_load():
-    token_receive = request.form['token_give']
+    token_receive = request.cookies.get('mytoken')
 
     try:
         email = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
@@ -127,9 +126,7 @@ def api_register():
     db.users.insert_one(doc)
 
     #  Email 과 같은 이름으로 S3에 폴더를 생성하기
-
     s3 = storage.connection()
-
     try:
         s3.put_object(Bucket='sparata-sjw', Key=(email_receive + '/'))
     except Exception as e:
@@ -187,4 +184,3 @@ def api_login():
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
-

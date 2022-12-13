@@ -5,6 +5,17 @@ window.addEventListener("load", () => {
   $("#menu_wrap").hide();
 });
 
+function listing() {
+  $.ajax({
+    type: "GET",
+    url: "/api/save",
+    data: { data_give: JSON.stringify(doc) },
+    success: function (response) {
+      console.log(response);
+    },
+  });
+}
+
 function onClickedImageUpload() {
   const imageInputElement = document.getElementById("main-img-input-file");
   const getimage = document.getElementById("main-img-input-file").value;
