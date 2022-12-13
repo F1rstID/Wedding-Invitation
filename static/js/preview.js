@@ -8,12 +8,11 @@ function getAllData() {
     url: "/api/load",
     data: {},
     success: function (response) {
-      let imageElement = document.querySelector(".main-wedding-img");
-      imageElement.style.backgroundImage = response["image_url"];
+      $(".main-wedding-img").css({
+        backgroundImage: `url(${response["image_url"]})`,
+      });
 
       $("#main-title").text(response["main_title"]);
-      console.log("!@#!@#123123123,", response["main_title"]);
-
       $(".groom-name").text(response["groom_name"]);
       $(".bride-name").text(response["bride_name"]);
       $("#groom-name").val(response["groom_name"]);

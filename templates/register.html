@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
     <title>회원가입 페이지</title>
@@ -13,14 +14,14 @@
 
     <!--Bootstrap-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-            crossorigin="anonymous"></script>
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
     <!--CSS-->
     <link rel="stylesheet" href="../static/style.css">
     <link rel="stylesheet" href="mediaqueires.css">
-    <link rel="icon" href="../static/img/favicon.png" type="image/png"/>
+    <link rel="icon" href="../static/img/favicon.png" type="image/png" />
 
     <script>
         let getCode
@@ -30,17 +31,17 @@
             let email = document.getElementById('email').value
             const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-            if(isDefined(email) === false){
+            if (isDefined(email) === false) {
                 return alert('빈칸, 곤란.')
             }
-            if(re.test(email) === false){
+            if (re.test(email) === false) {
                 return alert('올바른 이메일 주소를 입력하세요.')
             }
 
             $.ajax({
                 type: 'POST',
                 url: '/api/mail',
-                data: {email_give: email},
+                data: { email_give: email },
                 success: function (response) {
                     console.log(response)
                     if (response['result'] === 'failed') {
@@ -119,28 +120,28 @@
         .registerBox {
             display: none;
         }
-
     </style>
 </head>
 
 <body id="regi_body_wrap" class="register_body">
-<form id="msform">
-    <h3>회원 가입</h3>
-    <input id="email" type="text" name="email" placeholder="Email"/>
-    <div class="emailSendButton">
-        <input onclick="sendMail()" type="button" name="next" class="next action-button" value="이메일 인증"/>
-    </div>
-    <div class="emailCodeBox" id="emailCodeBox">
-        <input id='emailCode' type="text" name="emailcode" placeholder="EmailCode"/>
-        <input onclick="checkCode()" type="button" name="next" class="next action-button" value="확인"/>
-    </div>
-    <div class="registerBox" id="registerBox">
-        <input id='name' type="text" name="name" placeholder="Nickname"/>
-        <input id="pw" type="password" name="pass" placeholder="Password"/>
-        <input id="pw2" type="password" name="cpass" placeholder="Confirm Password"/>
-        <input onclick="register()" type="button" name="next" class="next action-button" value="회원가입"/>
-    </div>
+    <form id="msform">
+        <h3>회원 가입</h3>
+        <input id="email" type="text" name="email" placeholder="Email" />
+        <div class="emailSendButton">
+            <input onclick="sendMail()" type="button" name="next" class="next action-button" value="이메일 인증" />
+        </div>
+        <div class="emailCodeBox" id="emailCodeBox">
+            <input id='emailCode' type="text" name="emailcode" placeholder="EmailCode" />
+            <input onclick="checkCode()" type="button" name="next" class="next action-button" value="확인" />
+        </div>
+        <div class="registerBox" id="registerBox">
+            <input id='name' type="text" name="name" placeholder="Nickname" />
+            <input id="pw" type="password" name="pass" placeholder="Password" />
+            <input id="pw2" type="password" name="cpass" placeholder="Confirm Password" />
+            <input onclick="register()" type="button" name="next" class="next action-button" value="회원가입" />
+        </div>
 
-</form>
+    </form>
 </body>
+
 </html>

@@ -64,6 +64,12 @@ MAIN SECTION
   justify-content: space-between;
   align-items: center;
 }
+.main-title-container > p:nth-child(2) {
+  font-family: "Simonetta", cursive;
+  font-size: 24px;
+  color: var(--main-color);
+  margin-bottom: 50px;
+}
 .main-wedding-img-container {
   display: flex;
   flex-direction: column;
@@ -141,6 +147,11 @@ INVITATION PHRASES SECTION
   justify-content: center;
   align-items: center;
   margin-bottom: 50px;
+}
+.family-middle {
+  /* background-color: blue; */
+  margin-left: 10px;
+  width: 55px;
 }
 .groom-family-name {
   display: flex;
@@ -255,6 +266,7 @@ CONGRATULATION CONTACT SECTION
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 150px;
 }
 .button {
   display: inline-block;
