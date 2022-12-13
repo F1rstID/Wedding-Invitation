@@ -10,6 +10,7 @@ import base64
 import mongo
 import storage
 
+
 db = mongo.client.users
 app = Flask(__name__)
 SECRET_KEY = 'Fullstack Mini Project'
@@ -31,30 +32,33 @@ mail = Mail(app)
 def home():
     return render_template('login.html')
 
+
 @app.route('/register', methods=['GET', 'POST'])
 def register_page():
     return render_template('register.html')
+
 
 @app.route('/edit_view')
 def editview():
     return render_template('edit_view.html')
 
+
 def upload(image_data, email):
     s3 = storage.connection()
 
     try:
-        image0 = image_data.split('data:image/png;base64,')[1]
-        image = image0 + '=' * (4 - len(image0) % 4)
-        decodedData = base64.b64decode(image)
-
+        image_split = image_data.split('base64,')[1]
+        image = image_split + '=' * (4 - len(image_split) % 4)
+        decoded_data = base64.b64decode(image)
         s3.put_object(Key=email + '/' + '1.jpg',
-                      Body=decodedData,
+                      Body=decoded_data,
                       ContentType='image/*',
                       ACL='public-read',
-                      Bucket='sparata-sjw')
+                      Bucket=storage.BUCKET)
     except Exception as e:
         print(e)
     return print('success')
+
 
 @app.route('/api/save', methods=['POST'])
 def api_save():
@@ -74,7 +78,8 @@ def api_save():
     doc['email'] = email['email']
 
     upload(data['image_url'], email['email'])
-    doc['image_url'] = 'https://sparata-sjw.s3.ap-northeast-2.amazonaws.com/' + email['email'] + '/1.jpg'
+    doc['image_url'] = 'https://sparata-sjw.s3.ap-northeast-2.amazonaws.com/' + \
+        email['email'] + '/1.jpg'
 
     if userdata is None:
         db.usersdata.insert_one(doc)
@@ -83,9 +88,10 @@ def api_save():
     db.usersdata.update_one({'email': email['email']}, {'$set': doc})
     return doc
 
-@app.route('/api/load', methods=['POST'])
+
+@app.route('/api/load', methods=['GET'])
 def api_load():
-    token_receive = request.form['token_give']
+    token_receive = request.cookies.get("mytoken")
 
     try:
         email = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
@@ -100,9 +106,11 @@ def api_load():
 
     return jsonify(doc)
 
+
 @app.route('/edit_view', methods=['GET', 'POST'])
 def edit_view_page():
     return render_template('edit_view.html')
+
 
 @app.route('/api/register', methods=['GET', 'POST'])
 def api_register():
@@ -121,7 +129,7 @@ def api_register():
     #  Email 과 같은 이름으로 S3에 폴더를 생성하기
     s3 = storage.connection()
     try:
-        s3.put_object(Bucket='sparata-sjw', Key=(email_receive + '/'))
+        s3.put_object(Bucket=storage.BUCKET, Key=(email_receive + '/'))
     except Exception as e:
         print(e)
 
@@ -136,7 +144,8 @@ def api_mail():
     if email is not None:
         return jsonify({'result': 'failed', 'msg': '이미 사용중인 이메일입니다.'})
 
-    random_code = "".join([random.choice(string.ascii_letters) for _ in range(10)])
+    random_code = "".join([random.choice(string.ascii_letters)
+                          for _ in range(10)])
     msg_body = f'Code : {random_code}'
     msg = Message(subject="항해99 | 모바일 청첩장 만들기",
                   sender=app.config.get("MAIL_USERNAME"),
@@ -175,7 +184,9 @@ def api_login():
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
 
 
-
+@app.route('/preview')
+def preview():
+    return render_template('preview.html')
 
 
 if __name__ == '__main__':

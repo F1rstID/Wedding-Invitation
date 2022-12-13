@@ -2,8 +2,44 @@ let imageData = "";
 
 window.addEventListener("load", () => {
   setupBind();
+  getAllData();
+
   $("#menu_wrap").hide();
 });
+
+function getAllData() {
+  $.ajax({
+    type: "GET",
+    url: "/api/load",
+    data: {},
+    success: function (response) {
+      let imageElement = document.querySelector(".main-wedding-img");
+      imageElement.style.backgroundImage = response["image_url"];
+
+      $("#main-title-textarea").val(response["main_title"]);
+      $("#floating-input-groom").val(response["groom_name"]);
+      $("#floating-input-bride").val(response["bride_name"]);
+      $("#groom-name").val(response["groom_name"]);
+      $("#bride-name").val(response["bride_name"]);
+      $("#floating-input-detail-date").val(response["wedding_date"]);
+      $("#floating-input-detail-location").val(
+        response["wedding_detail_location"]
+      );
+      $("#invite-phrases-textarea").val(response["invitation_parases"]);
+      $("#groom-father-name").val(response["groom_father_name"]);
+      $("#groom-mother-name").val(response["groom_mother_name"]);
+      $("#bride-father-name").val(response["bride_father_name"]);
+      $("#bride-mother-name").val(response["bride_mother_name"]);
+
+      $("#wedding-hall-name").val(response["wedding_hall_name"]);
+      $("#wedding-hall-address").val(response["wedding_hall_address"]);
+      $("#wedding-hall-phone").val(response["wedding_hall_contact"]);
+
+      $("#input-groom-contact").val(response["groom_contact"]);
+      $("#input-bride-contact").val(response["bride_contact"]);
+    },
+  });
+}
 
 function onClickedImageUpload() {
   const imageInputElement = document.getElementById("main-img-input-file");
@@ -83,14 +119,15 @@ function editSave() {
     bride_contact: brideContact,
   };
 
-  $.ajax({
-    type: "POST",
-    url: "/api/save",
-    data: { data_give: JSON.stringify(doc) },
-    success: function (response) {
-      console.log(response);
-    },
-  });
+    $.ajax({
+        type: "POST",
+        url: "/api/save",
+        data: {data_give: JSON.stringify(doc)},
+        success: function (response) {
+            console.log(response);
+        },
+    });
+}
 
   /////////////////////////////////////////////////////////////////
   //============================ Map =====================
@@ -104,8 +141,10 @@ function editSave() {
       level: 3, // 지도의 확대 레벨
     };
 
-  // 지도를 생성합니다
-  var map = new kakao.maps.Map(mapContainer, mapOption);
+
+
+    // 지도를 생성합니다
+    var map = new kakao.maps.Map(mapContainer, mapOption);
 
   // 장소 검색 객체를 생성합니다
   var ps = new kakao.maps.services.Places();
@@ -301,10 +340,9 @@ function editSave() {
     infowindow.open(map, marker);
   }
 
-  // 검색결과 목록의 자식 Element를 제거하는 함수입니다
-  function removeAllChildNods(el) {
-    while (el.hasChildNodes()) {
-      el.removeChild(el.lastChild);
-    }
-  }
+    // 검색결과 목록의 자식 Element를 제거하는 함수입니다
+    function removeAllChildNods(el) {
+        while (el.hasChildNodes()) {
+            el.removeChild(el.lastChild);
+        }
 }
