@@ -5,7 +5,7 @@ window.addEventListener("load", () => {
 function getAllData() {
   $.ajax({
     type: "GET",
-    url: "/api/load",
+    url: "/api/load/<email>",
     data: {},
     success: function (response) {
       $(".main-wedding-img").css({

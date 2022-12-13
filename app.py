@@ -10,7 +10,6 @@ import base64
 import mongo
 import storage
 
-
 db = mongo.client.users
 app = Flask(__name__)
 SECRET_KEY = 'Fullstack Mini Project'
@@ -79,7 +78,7 @@ def api_save():
 
     upload(data['image_url'], email['email'])
     doc['image_url'] = 'https://sparata-sjw.s3.ap-northeast-2.amazonaws.com/' + \
-        email['email'] + '/1.jpg'
+                       email['email'] + '/1.jpg'
 
     if userdata is None:
         db.usersdata.insert_one(doc)
@@ -105,6 +104,16 @@ def api_load():
         return '없어요, 아무것도, 진짜로'
 
     return jsonify(doc)
+
+
+@app.route('/api/load/<email>', methods=['GET'])
+def api_load_get(email):
+    doc = db.usersdata.find_one({'email': email}, {'_id': False})
+
+    if doc is None:
+        return '없어요, 아무것도, 진짜로'
+
+    return redirect(url_for('preview', doc=doc))
 
 
 @app.route('/edit_view', methods=['GET', 'POST'])
@@ -145,7 +154,7 @@ def api_mail():
         return jsonify({'result': 'failed', 'msg': '이미 사용중인 이메일입니다.'})
 
     random_code = "".join([random.choice(string.ascii_letters)
-                          for _ in range(10)])
+                           for _ in range(10)])
     msg_body = f'Code : {random_code}'
     msg = Message(subject="항해99 | 모바일 청첩장 만들기",
                   sender=app.config.get("MAIL_USERNAME"),
