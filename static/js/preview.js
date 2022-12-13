@@ -68,8 +68,5 @@ function shareMessage() {
   }
 
 
-function message(phoneNumber) {
-  location.href = "sms:" + phoneNumber;
-}
 
 
