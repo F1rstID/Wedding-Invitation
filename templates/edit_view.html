@@ -2,48 +2,48 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8"/>
+  <meta charset="UTF-8" />
 
-    <!-- OG -->
-    <meta property="og:title" content="모바일 청첩장"/>
-    <meta property="og:image" content="https://cdn.topstarnews.net/news/photo/201807/456143_108614_510.jpg"/>
-    <meta property="og:description" content="신랑, 신부의 아름다운 첫 시작"/>
+  <!-- OG -->
+  <meta property="og:title" content="모바일 청첩장" />
+  <meta property="og:image" content="https://cdn.topstarnews.net/news/photo/201807/456143_108614_510.jpg" />
+  <meta property="og:description" content="신랑, 신부의 아름다운 첫 시작" />
 
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-            crossorigin="anonymous"></script>
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
 
-    <!-- Style -->
-    <link rel="stylesheet" href="../static/edit-style.css"/>
-    <link rel="icon" href="../static/img/favicon.png" type="image/png"/>
+  <!-- Style -->
+  <link rel="stylesheet" href="../static/edit-style.css" />
+  <link rel="icon" href="../static/img/favicon.png" type="image/png" />
 </head>
 
 <body>
 
-<!-- NAV
+  <!-- NAV
     #################################################### -->
-<nav id="nav-container">
+  <nav id="nav-container">
     <ul class="nav nav-pills">
-        <li class="nav-item">
-            <button type="button" class="btn btn-outline-primary btn-nav" onclick="showPreview()">
-                미리보기
-            </button>
-        </li>
-        <li class="nav-item">
-            <button type="button" class="btn btn-primary btn-nav" onclick="editSave()">
-                저장
-            </button>
-        </li>
+      <li class="nav-item">
+        <button type="button" class="btn btn-outline-primary btn-nav" onclick="showPreview()">
+          미리보기
+        </button>
+      </li>
+      <li class="nav-item">
+        <button type="button" class="btn btn-primary btn-nav" onclick="editSave()">
+          저장
+        </button>
+      </li>
     </ul>
-</nav>
+  </nav>
 
-<!-- Main Section
+  <!-- Main Section
     #################################################### -->
-<section id="main-section">
+  <section id="main-section">
     <div class="main-title-container">
       <textarea class="form-control" id="main-title-textarea" name="main-title" cols="10" rows="3" maxlength="30"
         placeholder="메인 문구를 정해보세요.    예) 우리라는 이름의 아름다운 첫 시작"></textarea>
@@ -51,144 +51,140 @@
     </div>
 
     <div class="main-wedding-img-container">
-        <div class="main-wedding-img">
-            <div class="main-img-file-button">
-                <label for="main-img-input-file">
-                    이미지 업로드
-                </label>
-                <input type="file" id="main-img-input-file" accept="image/*" style="display: none"
-                       onclick="onClickedImageUpload()"/>
-            </div>
+      <div class="main-wedding-img">
+        <div class="main-img-file-button">
+          <label for="main-img-input-file">
+            이미지 업로드
+          </label>
+          <input type="file" id="main-img-input-file" accept="image/*" style="display: none"
+            onclick="onClickedImageUpload()" />
         </div>
+      </div>
     </div>
     </div>
 
     <div class="main-name-container">
-        <div class="form-floating mb-1 common-input">
-            <input type="text" class="form-control h-auto" id="floating-input-groom" placeholder="신랑 이름"/>
-            <label for="floating-input-groom">신랑 이름</label>
-        </div>
-        <div class="form-floating common-input">
-            <input type="text" class="form-control h-auto" id="floating-input-bride" placeholder="신부 이름"/>
-            <label for="floating-input-bride">신부 이름</label>
-        </div>
+      <div class="form-floating mb-1 common-input">
+        <input type="text" class="form-control h-auto" id="floating-input-groom" placeholder="신랑 이름" />
+        <label for="floating-input-groom">신랑 이름</label>
+      </div>
+      <div class="form-floating common-input">
+        <input type="text" class="form-control h-auto" id="floating-input-bride" placeholder="신부 이름" />
+        <label for="floating-input-bride">신부 이름</label>
+      </div>
     </div>
 
     <div class="main-address-container">
-        <div class="form-floating mb-1 common-input">
-            <input type="text" class="form-control h-auto" id="floating-input-detail-date"
-                   placeholder="예식 날짜를 입력해주세요."/>
-            <label for="floating-input-detail-date">예식 날짜 (예: 2023년 02월 04일, 토요일 오후 3시 30분)</label>
-        </div>
-        <div class="form-floating common-input">
-            <input type="text" class="form-control h-auto" id="floating-input-detail-location"
-                   placeholder="웨딩홀을 입력해주세요."/>
-            <label for="floating-input-detail-location">웨딩홀 (예: 더컨벤션 신사 4층, 그랜드볼룸)</label>
-        </div>
+      <div class="form-floating mb-1 common-input">
+        <input type="text" class="form-control h-auto" id="floating-input-detail-date" placeholder="예식 날짜를 입력해주세요." />
+        <label for="floating-input-detail-date">예식 날짜 (예: 2023년 02월 04일, 토요일 오후 3시 30분)</label>
+      </div>
+      <div class="form-floating common-input">
+        <input type="text" class="form-control h-auto" id="floating-input-detail-location" placeholder="웨딩홀을 입력해주세요." />
+        <label for="floating-input-detail-location">웨딩홀 (예: 더컨벤션 신사 4층, 그랜드볼룸)</label>
+      </div>
     </div>
-</section>
+  </section>
 
-<!-- Invitation Phrase Section
+  <!-- Invitation Phrase Section
     #################################################### -->
-<section id="invitation-phrase-section">
+  <section id="invitation-phrase-section">
     <div class="divide-line"></div>
     <h1 class="section-title wedding-announcement">결혼합니다</h1>
     <div class="card">
-        <div class="invite-phrases">
+      <div class="invite-phrases">
         <textarea class="form-control" id="invite-phrases-textarea" name="invitation-phrase" cols="10" rows="20"
-                  placeholder="문구를 작성해주세요"></textarea>
-        </div>
+          placeholder="문구를 작성해주세요"></textarea>
+      </div>
     </div>
     <div class="groom-family-name">
-        <div class="groom-parents">
-            <input type="text" class="groom-father-name mb-2" id="groom-father-name" placeholder="아버님 성함"/>
-            <input type="text" class="groom-mother-name mb-2" id="groom-mother-name" placeholder="어머님 성함"/>
-        </div>
-        <p>의 아들</p>
-        <input type="text" class="groom-name mb-2" id="groom-name" placeholder="신랑 이름"/>
+      <div class="groom-parents">
+        <input type="text" class="groom-father-name mb-2" id="groom-father-name" placeholder="아버님 성함" />
+        <input type="text" class="groom-mother-name mb-2" id="groom-mother-name" placeholder="어머님 성함" />
+      </div>
+      <p>의 아들</p>
+      <input type="text" class="groom-name mb-2" id="groom-name" placeholder="신랑 이름" />
     </div>
     <div class="bride-family-name">
-        <div class="bride-parents">
-            <input type="text" class="bride-father-name mb-2" id="bride-father-name" placeholder="아버님 성함"/>
-            <input type="text" class="bride-mother-name mb-2" id="bride-mother-name" placeholder="어머님 성함"/>
-        </div>
-        <p>의 딸</p>
-        <input type="text" class="bride-name mb-2" id="bride-name" placeholder="신부 이름"/>
+      <div class="bride-parents">
+        <input type="text" class="bride-father-name mb-2" id="bride-father-name" placeholder="아버님 성함" />
+        <input type="text" class="bride-mother-name mb-2" id="bride-mother-name" placeholder="어머님 성함" />
+      </div>
+      <p>의 딸</p>
+      <input type="text" class="bride-name mb-2" id="bride-name" placeholder="신부 이름" />
     </div>
-</section>
+  </section>
 
-<!-- Way to come Section
+  <!-- Way to come Section
     #################################################### -->
 
-<section id="waytocome-section">
+  <section id="waytocome-section">
     <div class="divide-line"></div>
     <div class="waytocome-container">
-        <div>
-            <p class="section-title">오시는 길</p>
-        </div>
+      <div>
+        <p class="section-title">오시는 길</p>
+      </div>
+      <div class="form-floating common-input">
+        <input type="text" class="form-control mb-2 h-auto" id="wedding-hall-name" placeholder="웨딩홀 이름를 입력해주세요." />
+        <label for="wedding-hall-name">웨딩홀 이름 (예: 더컨벤션 신사)</label>
+      </div>
+      <div>
         <div class="form-floating common-input">
-            <input type="text" class="form-control mb-2 h-auto" id="wedding-hall-name" placeholder="웨딩홀 이름를 입력해주세요."/>
-            <label for="wedding-hall-name">웨딩홀 이름 (예: 더컨벤션 신사)</label>
+          <input type="text" class="form-control mb-2 h-auto" id="wedding-hall-address" placeholder="웨딩홀 주소를 입력해주세요." />
+          <label for="wedding-hall-address">웨딩홀 주소 (예: 서울 강남구 강남대로 652)</label>
         </div>
-        <div>
-            <div class="form-floating common-input">
-                <input type="text" class="form-control mb-2 h-auto" id="wedding-hall-address"
-                       placeholder="웨딩홀 주소를 입력해주세요."/>
-                <label for="wedding-hall-address">웨딩홀 주소 (예: 서울 강남구 강남대로 652)</label>
-            </div>
+      </div>
+      <div>
+        <div class="form-floating common-input">
+          <input type="text" class="form-control h-auto" id="wedding-hall-phone" placeholder="웨딩홀 전화번호를 입력해주세요." />
+          <label for="wedding-hall-phone">웨딩홀 전화번호</label>
         </div>
-        <div>
-            <div class="form-floating common-input">
-                <input type="text" class="form-control h-auto" id="wedding-hall-phone" placeholder="웨딩홀 전화번호를 입력해주세요."/>
-                <label for="wedding-hall-phone">웨딩홀 전화번호</label>
-            </div>
-        </div>
-        <button type="button" class="btn btn-outline-primary" onclick="searchPlaces()">검색하기</button>
+      </div>
+      <button type="button" class="btn btn-outline-primary" onclick="searchPlaces()">검색하기</button>
     </div>
 
-</section>
-<div class="map_wrap">
+  </section>
+  <div class="map_wrap">
     <div id="map" style="width: 400px;height:400px;position:center;overflow:hidden;"></div>
 
     <div id="menu_wrap" class="bg_white">
-        <div class="option">
+      <div class="option">
 
-        </div>
-        <hr>
-        <ul id="placesList"></ul>
-        <div id="pagination"></div>
+      </div>
+      <hr>
+      <ul id="placesList"></ul>
+      <div id="pagination"></div>
     </div>
-</div>
+  </div>
 
-<!-- Congratulation Contact Section
+  <!-- Congratulation Contact Section
     #################################################### -->
-<section id="congratulation-contact-section">
+  <section id="congratulation-contact-section">
     <div class="divide-line"></div>
     <div class="congratulation-contact-container">
-        <div>
-            <p class="section-title">축하 연락처</p>
+      <div>
+        <p class="section-title">축하 연락처</p>
+      </div>
+      <div>
+        <div class="form-floating common-input">
+          <input type="text" class="form-control mb-2 h-auto" id="input-groom-contact" placeholder="신랑 연락처를 입력해주세요." />
+          <label for="input-groom-contact">신랑 연락처</label>
         </div>
-        <div>
-            <div class="form-floating common-input">
-                <input type="text" class="form-control mb-2 h-auto" id="input-groom-contact"
-                       placeholder="신랑 연락처를 입력해주세요."/>
-                <label for="input-groom-contact">신랑 연락처</label>
-            </div>
+      </div>
+      <div>
+        <div class="form-floating common-input">
+          <input type="text" class="form-control h-auto" id="input-bride-contact" placeholder="신부 연락처를 입력해주세요." />
+          <label for="input-bride-contact">신부 연락처</label>
         </div>
-        <div>
-            <div class="form-floating common-input">
-                <input type="text" class="form-control h-auto" id="input-bride-contact" placeholder="신부 연락처를 입력해주세요."/>
-                <label for="input-bride-contact">신부 연락처</label>
-            </div>
-        </div>
+      </div>
     </div>
-</section>
+  </section>
 
-<!-- Javascript
+  <!-- Javascript
     #################################################### -->
-<script type="text/javascript"
-        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=96e7c6e52ee729c9e2b0e6bd11f3e55c&libraries=services"></script>
-<script src="../static/js/edit_view.js"></script>
+  <script type="text/javascript"
+    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=96e7c6e52ee729c9e2b0e6bd11f3e55c&libraries=services"></script>
+  <script src="../static/js/edit_view.js"></script>
 </body>
 
 </html>

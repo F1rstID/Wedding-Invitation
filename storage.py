@@ -1,9 +1,13 @@
 import boto3
 
-ACCESS_KEY = "AKIAXDUCX6BN6DJT5YHR"
-SECRET_KEY = "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"
+# ACCESS_KEY = "AKIAXDUCX6BN6DJT5YHR"
+# SECRET_KEY = "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"
+# BUCKET = "test-buzz-bucket"
+ACCESS_KEY = "AKIA4SXRXEFCH535AXXB"
+SECRET_KEY = "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"
+BUCKET = "sparata-sjw"
 
-# AWS S3 연결.
+
 def connection():
     try:
         # s3 클라이언트 생성

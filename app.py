@@ -10,6 +10,7 @@ import base64
 import mongo
 import storage
 
+
 db = mongo.client.users
 app = Flask(__name__)
 SECRET_KEY = 'Fullstack Mini Project'
@@ -46,33 +47,14 @@ def upload(image_data, email):
     s3 = storage.connection()
 
     try:
-        image0 = image_data.split('data:image/png;base64,')[1]
-        image = image0 + '=' * (4 - len(image0) % 4)
-        decodedData = base64.b64decode(image)
-
-        s3.put_object(Key=email + '/' + '1.jpg',
-                      Body=decodedData,
-                      ContentType='image/*',
-                      ACL='public-read',
-                      Bucket=storage.BUCKET)
-    except Exception as e:
-        print(e)
-    return print('success')
-
-
-def upload(image_data, email):
-    s3 = storage.connection()
-
-    try:
-        image_split = image_data.split('data:image/jpeg;base64,')[1]
+        image_split = image_data.split('base64,')[1]
         image = image_split + '=' * (4 - len(image_split) % 4)
         decoded_data = base64.b64decode(image)
-
         s3.put_object(Key=email + '/' + '1.jpg',
                       Body=decoded_data,
                       ContentType='image/*',
                       ACL='public-read',
-                      Bucket='sparata-sjw')
+                      Bucket=storage.BUCKET)
     except Exception as e:
         print(e)
     return print('success')
@@ -96,7 +78,8 @@ def api_save():
     doc['email'] = email['email']
 
     upload(data['image_url'], email['email'])
-    doc['image_url'] = 'https://test-buzz-bucket.s3.ap-northeast-2.amazonaws.com/' + email['email'] + '/1.jpg'
+    doc['image_url'] = 'https://sparata-sjw.s3.ap-northeast-2.amazonaws.com/' + \
+        email['email'] + '/1.jpg'
 
     if userdata is None:
         db.usersdata.insert_one(doc)
@@ -104,6 +87,7 @@ def api_save():
 
     db.usersdata.update_one({'email': email['email']}, {'$set': doc})
     return doc
+
 
 @app.route('/api/load', methods=['GET'])
 def api_load():
@@ -160,7 +144,8 @@ def api_mail():
     if email is not None:
         return jsonify({'result': 'failed', 'msg': '이미 사용중인 이메일입니다.'})
 
-    random_code = "".join([random.choice(string.ascii_letters) for _ in range(10)])
+    random_code = "".join([random.choice(string.ascii_letters)
+                          for _ in range(10)])
     msg_body = f'Code : {random_code}'
     msg = Message(subject="항해99 | 모바일 청첩장 만들기",
                   sender=app.config.get("MAIL_USERNAME"),
@@ -198,5 +183,6 @@ def api_login():
     else:
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
 
+
 if __name__ == '__main__':
-    app.run('0.0.0.0', port=5000, debug=True)
+    app.run('0.0.0.0', port=5001, debug=True)

@@ -13,13 +13,10 @@ function getAllData() {
     url: "/api/load",
     data: {},
     success: function (response) {
-      console.log("123123", response);
-      $("#main-title-textarea").val(response["main_title"]);
-
       let imageElement = document.querySelector(".main-wedding-img");
-      // imageElement.style.backgroundImage = `url(${response["image_url"]})`;
       imageElement.style.backgroundImage = response["image_url"];
 
+      $("#main-title-textarea").val(response["main_title"]);
       $("#floating-input-groom").val(response["groom_name"]);
       $("#floating-input-bride").val(response["bride_name"]);
       $("#groom-name").val(response["groom_name"]);
