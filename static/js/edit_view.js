@@ -92,6 +92,7 @@ function editSave() {
             console.log(response);
         },
     });
+    }
 
     /////////////////////////////////////////////////////////////////
     //============================ Map =====================
@@ -308,5 +309,5 @@ function editSave() {
             el.removeChild(el.lastChild);
         }
     }
-}
+
 
