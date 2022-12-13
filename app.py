@@ -1,24 +1,16 @@
 import datetime
 import hashlib
 import json
-import boto3
 import jwt
 import string
 import random
 from flask import Flask, render_template, jsonify, request, session, redirect, url_for
 from flask_mail import Mail, Message
-from pymongo import MongoClient
-import certifi
 import base64
+import mongo
+import storage
 
-ca = certifi.where()
-
-client = MongoClient('mongodb+srv://test:sparta@shinjungwan.pvw0aqx.mongodb.net/?retryWrites=true&w=majority')
-db = client.users
-# client = MongoClient('mongodb+srv://test:sparta@cluster0.m55mutr.mongodb.net/Cluster0?retryWrites=true&w=majority',
-#                      tlsCAfile=ca)
-# db = client.test
-
+db = mongo.client.users
 app = Flask(__name__)
 SECRET_KEY = 'Fullstack Mini Project'
 
@@ -51,35 +43,22 @@ def editview():
 
 
 def upload(image_data, email):
-
-    s3 = s3_connection()
+    s3 = storage.connection()
 
     try:
-        # s3.put_object(Bucket='sparata-sjw', Key=(email+ '/'))
         image0 = image_data.split('data:image/png;base64,')[1]
         image = image0 + '=' * (4 - len(image0) % 4)
-        data1 = base64.b64decode(image)
+        decodedData = base64.b64decode(image)
 
-        print(data1)
         s3.put_object(Key=email + '/' + '1.jpg',
-                      Body=data1,
+                      Body=decodedData,
                       ContentType='image/*',
                       ACL='public-read',
                       Bucket='sparata-sjw')
     except Exception as e:
-
         print(e)
     return print('success')
 
-# s3 = s3_connection()
-#
-# try:
-#     s3.upload_file('C:\\Users\\wndhd\\Downloads\\papapa.png','sparata-sjw','wndhdks4536gmail.com.png')
-#     s3.put_object(Bucket='sparata-sjw', Key=('wndhdks4536@naver.com' + '/'))
-#
-# except Exception as e:
-#
-#     print(e)
 
 
 @app.route('/api/save', methods=['POST'])
@@ -96,9 +75,7 @@ def api_save():
         return '넌 누구냐.'
 
     userdata = db.usersdata.find_one({'email': email['email']})
-    # https://sparata-sjw.s3.ap-northeast-2.amazonaws.com/
     doc = data
-    # print(data['image_url'])
     doc['email'] = email['email']
 
     upload(data['image_url'], email['email'])
@@ -150,7 +127,9 @@ def api_register():
     db.users.insert_one(doc)
 
     #  Email 과 같은 이름으로 S3에 폴더를 생성하기
-    s3 = s3_connection()
+
+    s3 = storage.connection()
+
     try:
         s3.put_object(Bucket='sparata-sjw', Key=(email_receive + '/'))
     except Exception as e:
@@ -206,32 +185,6 @@ def api_login():
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
 
 
-#     AWS S3 연결.
-def s3_connection():
-    try:
-        # s3 클라이언트 생성
-        s3 = boto3.client(
-            service_name="s3",
-            region_name="ap-northeast-2",
-            aws_access_key_id="AKIA4SXRXEFCH535AXXB",
-            aws_secret_access_key="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",
-        )
-    except Exception as e:
-        print(e)
-    else:
-        print("s3 bucket connected!")
-        return s3
-
-
-# s3 = s3_connection()
-#
-# try:
-#     s3.upload_file('C:\\Users\\wndhd\\Downloads\\papapa.png','sparata-sjw','wndhdks4536gmail.com.png')
-#     s3.put_object(Bucket='sparata-sjw', Key=('wndhdks4536@naver.com' + '/'))
-#
-# except Exception as e:
-#
-#     print(e)
-
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
+
