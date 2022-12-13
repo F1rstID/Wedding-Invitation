@@ -113,7 +113,7 @@ def api_load_get(email):
     if doc is None:
         return '없어요, 아무것도, 진짜로'
 
-    return redirect(url_for('preview', doc=doc))
+    return redirect(url_for('preview', doc=doc, email=email))
 
 
 @app.route('/edit_view', methods=['GET', 'POST'])
