@@ -262,6 +262,24 @@ section {
   align-items: center;
 }
 
+#wedding-hall-name {
+  margin-top: 20px;
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 24px;
+  text-align: center;
+}
+
+#wedding-hall-address {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#map {
+  margin-top: 80px;
+}
+
 /*
   CONGRATULATION CONTACT SECTION
   ================================================ */
