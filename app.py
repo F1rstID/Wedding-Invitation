@@ -130,8 +130,6 @@ def api_load_get(email):
     bride_contact = doc['bride_contact']
     email = doc['email']
 
-
-
     return redirect(url_for('preview',
                             main_title=main_title,
                             image_url=image_url,
